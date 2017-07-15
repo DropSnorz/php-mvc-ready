@@ -1,9 +1,10 @@
+<?php
+    require_once "config.php";
+    require_once "src/Bootstrap.php";
 
-<html>	
-	<head>
-	</head>
-	<body>
-		<p>Hello World </p>
-	</body>
-</html>
+    session_start();
 
+    $boot = new Bootstrap();
+    $boot->start();
+
+?>
