@@ -23,7 +23,7 @@ $isDevMode = true;
 $db_user = "root";
 $db_pass = "";
 $db_name = "bd";
-$db_host = "localhost";
+$db_path = DIR_BASE . "db/data.sqlite";
 
 
 
@@ -34,24 +34,18 @@ if(file_exists("config.local.php")){
 
 
 
-define('BDD_USER', $db_user); // db user
-define('BDD_PASS', $db_pass); // db password
-define('BDD_NAME', $db_name); // database name
-define('BDD_HOST', $db_host); // db server
-
-
 //Doctrine ORM Configuration
 
 
 // Create a simple "default" Doctrine ORM configuration for Annotations
-$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/src/core/model" ), $isDevMode);
+$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/src/core/models" ), $isDevMode);
 
 $connectionParams = array(
-    'dbname' => BDD_NAME,
-    'user' => BDD_USER,
-    'password' => BDD_PASS,
-    'host' => BDD_HOST,
-    'driver' => 'pdo_mysql',
+    'dbname' => $db_name,
+    'user' => $db_user,
+    'password' => $db_pass,
+    'path' => $db_path,
+    'driver' => 'pdo_sqlite',
     'charset'  => 'utf8',
     'driverOptions' => array(
         1002 => 'SET NAMES utf8'
