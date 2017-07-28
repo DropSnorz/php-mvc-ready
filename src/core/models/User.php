@@ -3,7 +3,7 @@
 /**
 * @Entity @Table(name="user")
 */
-Class User {
+Class User{
         
         /**
         * @Id @Column(type="integer") @GeneratedValue
@@ -29,19 +29,19 @@ Class User {
         }
 
         public function getUsername() {
-                return $this->pseudo;
+                return $this->username;
         }
 
         public function getPassword() {
-                return $this->mdp;
+                return $this->password;
         }
 
-        public function setUsername($p) {
-                $this->pseudo = $p;
+        public function setUsername($unsername) {
+                $this->username = $username;
         }
 
-        public function setPassword($m) {
-                $this->mdp = $m;
+        public function setPassword($password) {
+                $this->password = $password;
         }
         
 }
