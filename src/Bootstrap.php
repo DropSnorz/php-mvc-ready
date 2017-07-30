@@ -47,21 +47,29 @@ class Bootstrap{
 
 		        $negotiator = new \Negotiation\Negotiator();
 
-				$acceptHeader = $_SERVER['HTTP_ACCEPT'];
-				$priorities   = array('text/html', 'application/json', 'application/xml');
 
-				$mediaType = $negotiator->getBest($acceptHeader, $priorities);
 
-				$value = $mediaType->getValue();
+                if(isset($_SERVER['HTTP_ACCEPT'])){
+
+                    $acceptHeader = $_SERVER['HTTP_ACCEPT'];
+                    $priorities   = array('text/html', 'application/json', 'application/xml');
+                    $mediaType = $negotiator->getBest($acceptHeader, $priorities);
+                    $retainedType = $mediaType->getValue();
+
+                }
+                else{
+                    $retainedType = 'text/html';
+                }
+
 
 				list($class, $method) = explode("/", $handler, 2);
 
 
-				if($mediaType->getValue() == "application/json" && method_exists($class, $method . "_json" )){
+				if($retainedType == "application/json" && method_exists($class, $method . "_json" )){
 					call_user_func_array(array(new $class, $method . "_json"), $vars);
 
 				}
-				elseif($mediaType->getValue() == "application/xml" && method_exists($class, $method . "_xml" )){
+				elseif($retainedType == "application/xml" && method_exists($class, $method . "_xml" )){
 
     				call_user_func_array(array(new $class, $method . "_xml"), $vars);
 
