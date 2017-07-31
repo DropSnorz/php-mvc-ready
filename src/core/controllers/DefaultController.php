@@ -8,18 +8,26 @@ class DefaultController extends BaseController{
 
 	function getHome(){
 
-		include DIR_CORE . "templates/home.php";
+		$data = [];
+		$content = $this->renderer->render('home', $data);
+		$this->response->setContent($content);
+
 	}
 
 	function getLogin(){
-		include DIR_CORE . "templates/login.php";
+		$data = [];
+		$content = $this->renderer->render('login', $data);
+		$this->response->setContent($content);
 	}
 
 	function postLogin(){
 
 		//TODO handle missing parameters
-		$login = $_POST['username'];
-		$password = $_POST['password'];
+		$login = $this->request->getParameter("username");
+		$password = $this->request->getParameter("password");
+
+		$data = [];
+
 
 		if(AuthentificationService::getInstance()->auth($login, $password)){
 			echo("Login success");
@@ -27,7 +35,8 @@ class DefaultController extends BaseController{
 		}
 		else{
 		
-			include DIR_CORE . "templates/login.php";
+			$content = $this->renderer->render('login', $data);
+			$this->response->setContent($content);
 
 		}
 	}

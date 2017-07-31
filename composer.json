@@ -12,7 +12,8 @@
         "patricklouys/http":"~1.4",
         "respect/validation": "^1.1",
         "doctrine/orm": "2.4.*",
-        "rdlowrey/auryn": "^1.4"
+        "rdlowrey/auryn": "^1.4",
+        "mustache/mustache": "^2.12"
 
     },
 

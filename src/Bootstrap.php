@@ -2,6 +2,7 @@
 
 require_once __DIR__ . "/../config.php";
 require_once DIR_BASE . "vendor/autoload.php";
+require_once "MustacheRenderer.php";
 
 class Bootstrap{
 
