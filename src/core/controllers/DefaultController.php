@@ -2,7 +2,9 @@
 
 require_once DIR_CORE . "services/AuthentificationService.php";
 
-class DefaultController{
+class DefaultController extends BaseController{
+
+
 
 	function getHome(){
 

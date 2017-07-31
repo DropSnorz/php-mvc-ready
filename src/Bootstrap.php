@@ -17,6 +17,11 @@ class Bootstrap{
    		 		}
 		});
 
+		$injector = include('Dependencies.php');
+
+		$request = $injector->make('Http\HttpRequest');
+		$response = $injector->make('Http\HttpResponse');
+
 		// Fetch method and URI from somewhere
 		$httpMethod = $_SERVER['REQUEST_METHOD'];
 		$uri = $_SERVER['REQUEST_URI'];
@@ -62,26 +67,29 @@ class Bootstrap{
                 }
 
 
-				list($class, $method) = explode("/", $handler, 2);
+				list($className, $method) = explode("/", $handler, 2);
 
 
-				if($retainedType == "application/json" && method_exists($class, $method . "_json" )){
-					call_user_func_array(array(new $class, $method . "_json"), $vars);
+				if($retainedType == "application/json" && method_exists($className, $method . "_json" )){
+					call_user_func_array(array($injector->make($className), $method . "_json"), $vars);
 
 				}
-				elseif($retainedType == "application/xml" && method_exists($class, $method . "_xml" )){
+				elseif($retainedType == "application/xml" && method_exists($className, $method . "_xml" )){
 
-    				call_user_func_array(array(new $class, $method . "_xml"), $vars);
-
+    				call_user_func_array(array($injector->make($className), $method . "_xml"), $vars);
 				}
 				else{
 
-    				call_user_func_array(array(new $class, $method), $vars);
-
+    				call_user_func_array(array($injector->make($className), $method), $vars);
 				}
 
 
-    			return true;
+    			foreach ($response->getHeaders() as $header) {
+    				header($header, false);
+    			}
+
+    			echo $response->getContent();
+
 		        break;
 		}
 	}
