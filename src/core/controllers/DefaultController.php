@@ -30,7 +30,7 @@ class DefaultController extends BaseController{
 
 
 		if(AuthentificationService::getInstance()->auth($login, $password)){
-			echo("Login success");
+			$this->response->setHeader("Location", "/dashboard");
 
 		}
 		else{
@@ -44,6 +44,6 @@ class DefaultController extends BaseController{
 
 	function getLogout(){
 		AuthentificationService::getInstance()->logout();
-		header("location:/");
+		$this->response->setHeader("Location", "/");
 	}
 }
