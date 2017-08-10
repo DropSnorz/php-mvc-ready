@@ -1,14 +1,14 @@
 <?php
-
+require_once DIR_CORE . "controllers/BaseAdminController.php";
 require_once DIR_CORE . "services/AuthentificationService.php";
 
-class DashboardController extends BaseController{
+class DashboardController extends BaseAdminController{
 
 	function getDashboard(){
 
 		AuthentificationService::getInstance()->loginRequired();
 		$data = [];
-		$content = $this->renderer->render('dashboard', $data);
+		$content = $this->render('dashboard', $data);
 		$this->response->setContent($content);
 	}
 }

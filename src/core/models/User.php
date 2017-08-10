@@ -9,19 +9,19 @@ Class User{
         * @Id @Column(type="integer") @GeneratedValue
         * @var int
         */
-        private $id;
+        protected $id;
         
         /**
         * @Column(type="string")
         * @var string
         */
-        private $username;
+        protected $username;
         
         /**
         * @Column(type="string")
         * @var string
         */
-        private $password;
+        protected $password;
         
         
         public function getId() {

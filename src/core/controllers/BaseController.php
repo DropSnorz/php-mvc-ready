@@ -17,4 +17,9 @@ class BaseController{
         $this->renderer = $renderer;
 
 	}
+
+	public function render($template, $data){
+
+		return $this->renderer->render($template, $data);
+	}
 }
