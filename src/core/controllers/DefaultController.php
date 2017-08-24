@@ -34,7 +34,8 @@ class DefaultController extends BaseController{
 
 		}
 		else{
-		
+
+			MessageService::setMessage("error", "Wrong username or password");
 			$content = $this->renderer->render('login', $data);
 			$this->response->setContent($content);
 

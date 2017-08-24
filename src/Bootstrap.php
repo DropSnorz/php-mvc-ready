@@ -2,6 +2,7 @@
 
 require_once __DIR__ . "/../config.php";
 require_once DIR_BASE . "vendor/autoload.php";
+require_once DIR_CORE . "services/MessageService.php";
 require_once "TwigRenderer.php";
 
 class Bootstrap{
@@ -50,10 +51,7 @@ class Bootstrap{
 		        $handler = $routeInfo[1];
 		        $vars = $routeInfo[2];
 
-
 		        $negotiator = new \Negotiation\Negotiator();
-
-
 
                 if(isset($_SERVER['HTTP_ACCEPT'])){
 
@@ -67,6 +65,7 @@ class Bootstrap{
                     $retainedType = 'text/html';
                 }
 
+                MessageService::processRequest();
 
 				list($className, $method) = explode("/", $handler, 2);
 

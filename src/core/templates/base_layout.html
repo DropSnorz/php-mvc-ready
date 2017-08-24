@@ -60,6 +60,12 @@
 
     <!-- Page Content -->
     <div class="container">
+        {% if core.message.exists %}
+            <div class="row">
+                {% include 'alert.html' with {'type' : core.message.type, 'text': core.message.text} only %}
+            </div>
+        {% endif %}
+
        {% block content %}
        {% endblock %}
     </div>

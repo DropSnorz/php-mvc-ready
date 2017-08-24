@@ -13,6 +13,11 @@ class TwigRenderer implements Renderer
 
     public function render($template, $data = []) : string
     {
+    	 $data = array_merge($data, [
+            'core' => ['message' => ['exists' => MessageService::hasMessage(),
+            					'text' => MessageService::readMessage()['text'],
+            					'type' => MessageService::readMessage()['type']]],
+        ]);
         return $this->renderer->render($template.".html", $data);
     }
 }
