@@ -1,5 +1,5 @@
 <?php
-require_once DIR_CORE . "controllers/BaseAdminController.php";
+require_once DIR_ADMIN . "controllers/BaseAdminController.php";
 require_once DIR_CORE . "services/AuthentificationService.php";
 
 class DashboardController extends BaseAdminController{

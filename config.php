@@ -10,12 +10,14 @@ use Doctrine\ORM\EntityManager;
 // Server parameters
 
 define('DIR_BASE',      dirname( __FILE__ )  . '/');
-define('DIR_CORE',    DIR_BASE . 'src/core/');
+define('DIR_MODULES',  DIR_BASE . "src/");
+define('DIR_CORE',    DIR_MODULES . 'core/');
 
 
 // Run mode
 
 $isDevMode = true;
+$appModules = array("core", "admin");
 
 
 // Database configuration
@@ -32,13 +34,19 @@ if(file_exists("config.local.php")){
   include "config.local.php";
 }
 
+define('APP_MODULES', $appModules);
 
+foreach (APP_MODULES as $module){
+    if(file_exists(DIR_MODULES . $module .'/Defaults.php')){
+        include DIR_MODULES . $module .'/Defaults.php';
+    }
+}
 
 //Doctrine ORM Configuration
 
 
 // Create a simple "default" Doctrine ORM configuration for Annotations
-$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/src/core/models" ), $isDevMode);
+$config = Setup::createAnnotationMetadataConfiguration(getModulesFolders("models"), $isDevMode);
 
 $connectionParams = array(
     'dbname' => $db_name,
@@ -59,6 +67,19 @@ $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
 $entityManager = EntityManager::create($conn, $config);
 
 
+
+function getModuleFolder($module, $folder){
+    return DIR_MODULES . $module . "/" . $folder;
+}
+
+function getModulesFolders($folder){
+    $arr = array();
+    foreach (APP_MODULES as $module) {
+        $arr[] = getModuleFolder($module, $folder);
+    }
+
+    return $arr;
+}
 
 class PersistenseService{
 

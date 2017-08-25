@@ -12,7 +12,10 @@ class Bootstrap{
 
 		$dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 
-			    $routes = include(DIR_CORE . 'Routes.php');
+				$routes = array();
+				foreach(APP_MODULES as $module){
+			    	$routes = array_merge($routes, include(DIR_MODULES . $module . '/Routes.php'));
+				}
 
     			foreach ($routes as $route) {
         			$r->addRoute($route[0], $route[1], $route[2]);

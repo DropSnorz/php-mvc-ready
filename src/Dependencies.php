@@ -16,7 +16,7 @@ $injector->alias('Http\Response', 'Http\HttpResponse');
 $injector->share('Http\HttpResponse');
 
 $injector->delegate('Twig_Environment', function () use ($injector) {
-    $loader = new Twig_Loader_Filesystem(dirname(__DIR__) . '/src/core/templates');
+    $loader = new Twig_Loader_Filesystem(getModulesFolders("templates"));
     $twig = new Twig_Environment($loader);
     return $twig;
 });
