@@ -80,4 +80,46 @@ class UserController extends BaseAdminController{
 		}
 
 	}
+
+	function getUserDelete($userId){
+
+		$user = getEntityManager()->find('User', $userId);
+		$error = false;
+		$errorMessage ="";
+		if($user == null){
+			$error = true;
+			$errorMessage = "This user does not exists";
+		}
+		elseif($user->getUsername() =="admin"){
+			$error = true;
+			$errorMessage = "You can't remove this user";			
+		}
+
+		$data = ['user' => $user,
+				'error' => $error,
+				'errorMessage' => $errorMessage  ];
+		$content = $this->render('user-delete', $data);
+		$this->response->setContent($content);
+	}
+
+	function postUserDelete($userId){
+
+		AuthentificationService::getInstance()->loginRequired();
+		$user = getEntityManager()->find('User', $userId);
+
+		if($user == null || $user->getUsername() == "admin"){
+			MessageService::setMessage("error", "Impossible de supprimer l'utilisateur");
+
+
+		}
+		else{
+			getEntityManager()->remove($user);
+			getEntityManager()->flush();
+			MessageService::setMessage("success", "User successfully deleted");
+
+		}
+
+		$this->response->setHeader("Location", "/admin/users");
+
+	}
 }

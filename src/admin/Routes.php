@@ -11,6 +11,8 @@ return [
     ['GET', '/admin/users', "UserController/getUserList"],
     ['GET', '/admin/user/create', "UserController/getUserCreate"],
     ['POST', '/admin/user/create', "UserController/postUserCreate"],
+    ['GET', '/admin/user/{id}/delete', "UserController/getUserDelete"],
+    ['POST', '/admin/user/{id}/delete', "UserController/postUserDelete"],
 
 
 

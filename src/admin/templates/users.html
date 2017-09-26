@@ -41,7 +41,9 @@
                             <td>{{user.username}}</td>
                             <td>************</td>
                             <td>
-                                <a href="admin/user/{{user.id}}/delete" class="btn btn-md btn-danger">Delete</a>
+                                {% if user.username != "admin" %}
+                                <a href="/admin/user/{{user.id}}/delete" class="btn btn-md btn-danger">Delete</a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}
