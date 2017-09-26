@@ -36,7 +36,7 @@ Class User{
                 return $this->password;
         }
 
-        public function setUsername($unsername) {
+        public function setUsername($username) {
                 $this->username = $username;
         }
 
