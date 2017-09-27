@@ -14,7 +14,7 @@ class BaseAdminController extends BaseController{
 	public function render($template, $data){
 
 		$extra = [
-			"user"=> AuthentificationService::getInstance()->getCurrentUser()
+			"current_user"=> AuthentificationService::getInstance()->getCurrentUser()
 		];
 
 		$data = array_merge($extra, $data);

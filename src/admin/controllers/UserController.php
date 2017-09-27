@@ -78,10 +78,62 @@ class UserController extends BaseAdminController{
 			$this->response->setHeader("Location", "/admin/users");
 
 		}
+	}
+
+	function getUserEdit($userId){
+		AuthentificationService::getInstance()->loginRequired();
+
+		$user = getEntityManager()->find("User", $userId);
+
+		if($user == null){
+			http_response_code(404);
+		}
+		else{
+
+			$data = ['user' => $user ];
+			$content = $this->render('user-edit', $data);
+			$this->response->setContent($content);
+		}
+	}
+
+	function postUserEdit($userId){
+		AuthentificationService::getInstance()->loginRequired();
+
+		$password = $this->request->getParameter("password");
+		$passwordCheck = $this->request->getParameter("password-check");
+
+		$user = getEntityManager()->find("User", $userId);
+
+		$error = false;
+
+		if($user == null){
+			http_response_code(404);
+
+		}
+		else{
+
+			if($password != $passwordCheck){
+
+				MessageService::setMessage("error", "Password fields mismatch");
+				$data = ['user' => $user ];
+				$content = $this->render('user-edit', $data);
+				$this->response->setContent($content);
+			}
+			else{
+				$hash = AuthentificationService::getInstance()->generateHash($password);
+				$user->setPassword($hash);
+				getEntityManager()->flush();
+
+				MessageService::setMessage("success", "User successfully updated");
+				$this->response->setHeader("Location", "/admin/users");
+
+			}
+		}
 
 	}
 
 	function getUserDelete($userId){
+		AuthentificationService::getInstance()->loginRequired();
 
 		$user = getEntityManager()->find('User', $userId);
 		$error = false;

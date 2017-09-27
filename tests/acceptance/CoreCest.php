@@ -14,7 +14,7 @@ class CoreCest
         $I->fillField('username', 'admin');
         $I->fillField('password', 'admin');
         $I->click('Login');
-        $I->amOnPage('/dashboard');
+        $I->amOnPage('/admin/dashboard');
 
     }
 }

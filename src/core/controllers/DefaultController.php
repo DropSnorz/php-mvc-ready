@@ -30,7 +30,7 @@ class DefaultController extends BaseController{
 
 
 		if(AuthentificationService::getInstance()->auth($login, $password)){
-			$this->response->setHeader("Location", "/dashboard");
+			$this->response->setHeader("Location", "/admin/dashboard");
 
 		}
 		else{
