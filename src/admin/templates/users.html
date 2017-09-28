@@ -1,27 +1,18 @@
 {% extends "base_admin.html" %}
 {% block content %}
 <!-- Page Heading -->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="#">Users</a>
+    </li>
+    <li class="breadcrumb-item active">All Users</li>
+</ol>
 <div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">
-            Users
-        </h1>
-        <ol class="breadcrumb">
-            <li>
-                <i class="fa fa-dashboard"></i>  <a href="/dashboard">Dashboard</a>
-            </li>
-            <li class="active">
-                <i class="fa fa-user"></i> Users
-            </li>
-        </ol>
-    </div>
-</div>
-<!-- /.row -->
-
-<div class="col-md-12">
+    <div class="col-md-12">
     <span class="pull-right">
-        <a href="/admin/user/create" class="btn btn-default"> <i class="fa fa-plus"></i> New user </a>
+        <a href="/admin/user/create" class="btn btn-secondary"> <i class="fa fa-plus"></i> New user </a>
     </span>
+</div>
 </div>
 <div class="row">
     <div class="col-md-12">

@@ -1,24 +1,12 @@
 {% extends "base_admin.html" %}
 {% block content %}
 <!-- Page Heading -->
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">
-            Delete user
-        </h1>
-        <ol class="breadcrumb">
-            <li>
-                <i class="fa fa-dashboard"></i>  <a href="/dashboard">Dashboard</a>
-            </li>
-            <li class="active">
-                <i class="fa fa-user"></i> Users
-            </li>
-            <li class="active">
-                <i class="fa fa-minus"></i> Delete user
-            </li>
-        </ol>
-    </div>
-</div>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="#">Users</a>
+    </li>
+    <li class="breadcrumb-item active">Delete user ({{user.username}})</li>
+</ol>
 <!-- /.row -->
 
 
