@@ -27,6 +27,8 @@ $db_pass = "";
 $db_name = "bd";
 $db_path = DIR_BASE . "db/data.sqlite";
 
+$proxyDir = DIR_BASE . "proxies";
+
 
 
 // Override current configuration with local properties
@@ -45,8 +47,17 @@ foreach (APP_MODULES as $module){
 //Doctrine ORM Configuration
 
 
+$useSimpleAnnotationReader = true;
+$cache = null;
+
+if(!$isDevMode){
+
+    $cache =  new \Doctrine\Common\Cache\FilesystemCache("cache");
+}
+
 // Create a simple "default" Doctrine ORM configuration for Annotations
-$config = Setup::createAnnotationMetadataConfiguration(getModulesFolders("models"), $isDevMode);
+$config = Setup::createAnnotationMetadataConfiguration(getModulesFolders("models"), $isDevMode, $proxyDir, $cache, $useSimpleAnnotationReader);
+
 
 $connectionParams = array(
     'dbname' => $db_name,
