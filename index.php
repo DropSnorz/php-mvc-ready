@@ -7,4 +7,3 @@
     $boot = new Bootstrap();
     $boot->start();
 
-?>

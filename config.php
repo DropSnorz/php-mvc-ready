@@ -113,5 +113,3 @@ PersistenseService::setEntityManager($entityManager);
 function getEntityManager(){
 	return PersistenseService::getEntityManager();
 }
-
-?>
